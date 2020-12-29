@@ -3,11 +3,14 @@ from rest_framework import serializers
 from .models import Employee, Department, Position
 
 
-# TODO: implement hyperlinked model serializer
 class EmployeeSerializer(serializers.ModelSerializer):
+    manager = serializers.HyperlinkedRelatedField(view_name='users-detail', read_only=True)
+    department = serializers.HyperlinkedRelatedField(view_name='departments-detail', read_only=True)
+    position = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Employee
-        fields = '__all__'
+        fields = ('id', 'first_name', 'last_name', 'manager', 'department', 'position')
 
 
 class DepartmentSerializer(serializers.ModelSerializer):

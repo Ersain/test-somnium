@@ -19,9 +19,6 @@ class Department(models.Model):
     title = models.CharField(max_length=255)
     parent_department = models.ForeignKey(to='Department', on_delete=models.CASCADE, null=True, blank=True)
 
-    def get_absolute_url(self):
-        return reverse('organization.views.DepartmentViewSet', args=[str(self.id)])
-
     def __str__(self):
         return f'{self.title}'
 
